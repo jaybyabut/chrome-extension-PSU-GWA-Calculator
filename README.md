@@ -1,0 +1,62 @@
+# 🎓 PSU GWA Calculator
+**An automated utility for Pampanga State University students to view and calculate GWA directly from the SMS Portal.**
+
+
+## 🌟 Features
+- **Auto-Extraction:** Automatically reads your grades from the PSAU SMS Portal.
+- **GWA Calculator:** Instant calculation of your General Weighted Average (GWA).
+- **Clean UI:** A simple, non-intrusive popup to view your academic performance at a glance.
+
+
+
+---
+
+## 🚀 How to Install (1-Minute Guide)
+
+Because this extension is a student-made tool and not on the Web Store, you need to load it manually:
+
+1. **Download the Code:**
+   - Click the green **Code** button at the top of this page.
+   - Select **Download ZIP**.
+   - Extract the `.zip` file to a folder on your computer.
+
+2. **Open Chrome Extensions:**
+   - Open Google Chrome and type `chrome://extensions/` in the address bar.
+   - Alternatively, go to **Settings > Extensions**.
+
+3. **Enable Developer Mode:**
+   - In the top-right corner, toggle the **Developer mode** switch to **ON**.
+
+4. **Load the Extension:**
+   - Click the **Load unpacked** button.
+   - Select the folder where you extracted the files (the folder containing `manifest.json`).
+
+---
+
+## 📊 How to Use
+1. Log in to your **PSU SMS Portal**.
+2. Navigate to the **Grades** section (where your table of grades appears).
+3. Click the **Extension Icon** (🧩) in your Chrome toolbar.
+   - *Tip: Pin the extension for quicker access!*
+4. Your grades and GWA will automatically populate in the popup!
+
+
+
+---
+
+## 🛠️ Built With
+- **HTML5 & CSS3:** For the popup structure and styling.
+- **JavaScript (ES6):** For XHR interception and DOM parsing.
+- **Chrome Extension API (Manifest V3):** For background service workers and messaging.
+
+## 🔒 Privacy & Security
+- This extension **does not** store your credentials.
+- All grade data is processed **locally** on your browser and is not sent to any external servers.
+- The extension only activates when it detects a grade-related request from the PSU portal.
+
+---
+
+## 👨‍💻 Contributing
+Feel free to fork this project, report bugs, or submit pull requests to improve the GWA calculation logic!
+
+**Disclaimer:** This is an unofficial tool and is not affiliated with Pampanga State University.
