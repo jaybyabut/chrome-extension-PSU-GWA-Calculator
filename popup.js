@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeSelect = document.getElementById('themeSelect');
     const body = document.body;
 
-    // Load saved theme
+
     if (chrome.storage && chrome.storage.local) {
         chrome.storage.local.get(['theme'], (result) => {
             if (result.theme) {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Save theme on change
+
     if (themeSelect) {
         themeSelect.addEventListener('change', (e) => {
             const newTheme = e.target.value;
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     chrome.runtime.sendMessage({ action: "getGrades" }, (response) => {
-        // Check for connection errors
+
         if (chrome.runtime.lastError) {
             console.error("Connection error:", chrome.runtime.lastError);
             return;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const tbody = document.querySelector("#gradeTable tbody");
 
-        // Handle potential null response gracefully
+
         if (!response) {
             tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>No response from background script.</td></tr>";
             return;
@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.innerHTML = "";
             response.data.forEach(item => {
                 const row = document.createElement('tr');
-                // Ensure data aligns with: Subject | Units | Grade
                 row.innerHTML = `
                     <td>${item.Descriptive}</td>
                     <td>${item.Units}</td>
