@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Grades</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <header>
+        <h3>My Grades</h3>
+        <select id="themeSelect" aria-label="Select Theme">
+            <option value="blue">Blue</option>
+            <option value="violet">Violet</option>
+            <option value="green">Green</option>
+            <option value="maroon">Maroon</option>
+        </select>
+    </header>
+
+    <div class="card">
+        <table id="gradeTable">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Units</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Javascript will populate this -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
