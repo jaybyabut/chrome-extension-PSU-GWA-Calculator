@@ -1,7 +1,6 @@
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete' && tab.url?.startsWith('http')) {
-        console.log(tab.url);
+    if (changeInfo.status === 'complete' && tab.url?.startsWith('https://sms.dhvsu.edu.ph/')) {
         chrome.scripting.executeScript({
             target: { tabId: tabId },
             world: 'MAIN',
@@ -16,7 +15,6 @@ function gradeReader() {
     if (window.__API_READER_LOADED__) return;
     window.__API_READER_LOADED__ = true;
 
-    console.log("Reading Grades...");
 
 
     const rawOpen = window.XMLHttpRequest.prototype.open;
@@ -74,7 +72,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 function checkAndClearData() {
     chrome.tabs.query({ url: "https://sms.dhvsu.edu.ph/*" }, (tabs) => {
         if (tabs.length === 0) {
-            console.log("No matching tabs found. clearing data.");
             chrome.storage.local.remove(["interceptedGrades"]);
         }
     });
