@@ -68,3 +68,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return true; 
     }
 });
+
+
+function checkAndClearData() {
+    chrome.tabs.query({ url: "https://sms.dhvsu.edu.ph/*" }, (tabs) => {
+        if (tabs.length === 0) {
+            console.log("No matching tabs found. clearing data.");
+            chrome.storage.local.remove(["interceptedGrades"]);
+        }
+    });
+}
+
+chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
+    checkAndClearData();
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    // Check if the user navigated away in the same tab
+    if (changeInfo.status === 'complete' || changeInfo.url) {
+        checkAndClearData();
+    }
+});
