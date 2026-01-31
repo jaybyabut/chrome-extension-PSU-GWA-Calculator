@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <h3>My Grades</h3>
+        <h3 id="gradeHeader">My Grades</h3>
         <select id="themeSelect" aria-label="Select Theme">
             <option value="blue">Blue</option>
             <option value="violet">Violet</option>
@@ -20,6 +20,10 @@
     </header>
 
     <div class="card">
+        <div id="noDataMessage"
+            style="display: none; padding: 2rem 1rem; text-align: center; color: hsl(var(--muted-foreground));">
+            No data found. Please navigate to the grades section in the portal and refresh the grades page.
+        </div>
         <table id="gradeTable">
             <thead>
                 <tr>

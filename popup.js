@@ -52,20 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const tbody = document.querySelector("#gradeTable tbody");
+        const table = document.getElementById('gradeTable');
+        const noDataMsg = document.getElementById('noDataMessage');
+        const headerTitle = document.getElementById('gradeHeader');
+        const tbody = table.querySelector("tbody");
 
+        // Clean up previous GWA display if exists
+        const existingGwa = document.querySelector('body > p');
+        if (existingGwa) existingGwa.remove();
 
-        if (!response) {
-            tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>No response from background script.</td></tr>";
-            return;
-        }
+        if (response && response.data && response.data.length > 0) {
+            // Show Table & Header
+            table.style.display = '';
+            headerTitle.style.display = 'block';
+            noDataMsg.style.display = 'none';
 
-        const gwa = calcGWA(response);
-        const gwaElement = document.createElement('p');
-        gwaElement.textContent = `GWA: ${gwa}`;
-        body.appendChild(gwaElement);
+            const gwa = calcGWA(response);
+            const gwaElement = document.createElement('p');
+            gwaElement.textContent = `GWA: ${gwa}`;
+            body.appendChild(gwaElement);
 
-        if (response.data && response.data.length > 0) {
             tbody.innerHTML = "";
             response.data.forEach(item => {
                 const row = document.createElement('tr');
@@ -77,7 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tbody.appendChild(row);
             });
         } else {
-            tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>No data found. Please refresh the grades page.</td></tr>";
+            // Show Message Only, Hide Header
+            table.style.display = 'none';
+            headerTitle.style.display = 'none';
+            noDataMsg.style.display = 'block';
         }
     });
 });

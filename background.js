@@ -1,9 +1,10 @@
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status === 'complete' && tab.url?.startsWith('http')) {
+        console.log(tab.url);
         chrome.scripting.executeScript({
             target: { tabId: tabId },
-            world: 'MAIN', 
+            world: 'MAIN',
             func: gradeReader
         });
     }
@@ -19,7 +20,7 @@ function gradeReader() {
 
 
     const rawOpen = window.XMLHttpRequest.prototype.open;
-    window.XMLHttpRequest.prototype.open = function(method, url) {
+    window.XMLHttpRequest.prototype.open = function (method, url) {
         this.addEventListener('load', () => {
             try {
                 const response = JSON.parse(this.responseText);
@@ -43,12 +44,12 @@ function gradeReader() {
                     });
 
                     if (results.length > 0) {
-                        window.dispatchEvent(new CustomEvent('GRADES_DATA_READY', { 
-                            detail: JSON.stringify(results) 
+                        window.dispatchEvent(new CustomEvent('GRADES_DATA_READY', {
+                            detail: JSON.stringify(results)
                         }));
                     }
                 }
-            } catch (e) {}
+            } catch (e) { }
         });
         return rawOpen.apply(this, arguments);
     };
@@ -60,12 +61,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.storage.local.get(["interceptedGrades"], (result) => {
             sendResponse({ data: result.interceptedGrades || [] });
         });
-        return true; 
+        return true;
     }
-    
+
     if (message.type === "SAVE_GRADES") {
         chrome.storage.local.set({ interceptedGrades: message.data });
-        return true; 
+        return true;
     }
 });
 
