@@ -8,7 +8,7 @@
     "storage"
   ],
   "host_permissions": [
-    "https://sms.dhvsu.edu.ph/*"
+    "https://sms.pampangastateu.edu.ph/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -16,7 +16,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://sms.dhvsu.edu.ph/*"
+        "https://sms.pampangastateu.edu.ph/*"
       ],
       "js": [
         "content.js"
