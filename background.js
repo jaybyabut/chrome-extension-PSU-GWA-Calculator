@@ -1,6 +1,6 @@
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete' && tab.url?.startsWith('https://sms.dhvsu.edu.ph/')) {
+    if (changeInfo.status === 'complete' && tab.url?.startsWith('https://sms.pampangastateu.edu.ph/')) {
         chrome.scripting.executeScript({
             target: { tabId: tabId },
             world: 'MAIN',
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 
 function checkAndClearData() {
-    chrome.tabs.query({ url: "https://sms.dhvsu.edu.ph/*" }, (tabs) => {
+    chrome.tabs.query({ url: "https://sms.pampangastateu.edu.ph/*" }, (tabs) => {
         if (tabs.length === 0) {
             chrome.storage.local.remove(["interceptedGrades"]);
         }
