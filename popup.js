@@ -27,10 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (chrome.storage && chrome.storage.local) {
         chrome.storage.local.get(['theme'], (result) => {
-            if (result.theme) {
-                body.setAttribute('data-theme', result.theme);
-                if (themeSelect) themeSelect.value = result.theme;
-            }
+            const theme = result.theme || 'minimal';
+            body.setAttribute('data-theme', theme);
+            if (themeSelect) themeSelect.value = theme;
         });
     }
 
