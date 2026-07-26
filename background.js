@@ -87,3 +87,40 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         checkAndClearData();
     }
 });
+
+
+// ─── Auto-refresh when user navigates to the grades page ───
+// Tracks per-tab: the URL that was already reloaded, so we never reload twice for the same navigation.
+const reloadedGradesTabs = new Map(); // tabId -> reloadedUrl
+
+function isGradesUrl(url) {
+    return url &&
+        url.toLowerCase().includes('grade') &&
+        url.toLowerCase().startsWith('https://sms.pampangastateu.edu.ph/');
+}
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status !== 'complete' || !tab.url) return;
+
+    if (isGradesUrl(tab.url)) {
+        const alreadyReloadedUrl = reloadedGradesTabs.get(tabId);
+
+        if (alreadyReloadedUrl === tab.url) {
+            // This 'complete' event is from our own reload — do nothing
+            return;
+        }
+
+        // First time arriving at this grades URL — mark and reload once
+        reloadedGradesTabs.set(tabId, tab.url);
+        chrome.tabs.reload(tabId);
+    } else {
+        // Navigated away from grades — clear the tracker so a future
+        // navigation back to grades will trigger a fresh reload
+        reloadedGradesTabs.delete(tabId);
+    }
+});
+
+// Clean up when a tab is closed
+chrome.tabs.onRemoved.addListener((tabId) => {
+    reloadedGradesTabs.delete(tabId);
+});
